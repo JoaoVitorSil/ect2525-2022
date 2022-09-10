@@ -1,29 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, Alert, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import Constants from 'expo-constants'
+import { FontAwesome } from '@expo/vector-icons'
 
-const image = { uri: "https://1.bp.blogspot.com/-wFpliM65Egg/YX6aqcp7UtI/AAAAAAAAixY/AEXmzsmPQqcaTl4_dewCrdtnIfk78PGEQCNcBGAsYHQ/s16000/os-melhores-wallpapers-de-naruto-celular%2B%25281%2529.png" };
 
 export default function App() {
   return (
     <View style={styles.container}>
-        
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <StatusBar 
-          backgroundColor='white' 
-        />
-        
-        <View style={styles.container1}>
-          <Text style={styles.text1}>Você caiu no meu genjutsu</Text>
+        <StatusBar style='auto'/>
+        <View style={styles.header}>
+          <Image style={styles.ufrngram} source={require('./assets/images/ufrngram.png')} />
+          <FontAwesome name='paper-plane' size={24} color='black'/>
         </View>
-        <View style={styles.container2}>
-          <Button
-            color= "red"
-            title="Sharingan"
-            onPress={() => Alert.alert('Me pague uma coxinha')}
-          />
+        <View style={styles.stories}>
+          <View style={styles.story}>
+            <Image style={styles.imgstory} source={require('./assets/images/pernalonga.png')}/>
+            <Text>Perna</Text>
+          </View>
+          <View style={styles.story}>
+            <Image style={styles.imgstory} source={require('./assets/images/frajola.png')}/>
+            <Text>Frajola</Text>
+          </View>
+          <View style={styles.story}>
+            <Image style={styles.imgstory} source={require('./assets/images/patolino.png')}/>
+            <Text>Patolino</Text>
+          </View>
+          <View style={styles.story}>
+            <Image style={styles.imgstory} source={require('./assets/images/taz.webp')}/>
+            <Text>Taz</Text>
+          </View>
+          <View style={styles.story}>
+            <Image style={styles.imgstory} source={require('./assets/images/piupiu.png')}/>
+            <Text>Piu Piu</Text>
+          </View>
         </View>
-        
-      </ImageBackground>    
+        <View style={styles.feed}>
+          <View  style={styles.post}>
+              <View style={styles.postheader}>
+                <View style={styles.postheaderesquerda}>
+                  <Image style={styles.postheaderimg} source={require('./assets/images/piupiu.png')}/>
+                  <Text>Piu Piu</Text>
+                </View>
+                <FontAwesome name='ellipsis-h' size={24} color='black'/>
+              </View>
+              <View>
+                <Image style={styles.postimg} source={require('./assets/images/tiny_toon.jpg')}></Image>
+              </View>
+          </View>
+        </View>
     </View>
    
   );
@@ -33,34 +57,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
   },
-  container1: {
-    flex: 1,
+  header: {
+    height: 50,
+    backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    padding: 10
   },
-  container2: {
-    flex: 1,
+  ufrngram: {
+    height: 25,
+    width: 110,
+  },
+  stories: {
+    height: 90,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+  },
+  story: {
+    height: 90,
+    width: 90,
+    backgroundColor: '#fff', 
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginBottom: 50,
   },
-
-  image: {
+  imgstory: {
+    width: 70,
+    height: 70, 
+    borderRadius: 35,
+  },
+  feed: {
     flex: 1,
-    width: '100%',
-    flexDirection: "column",
-    justifyContent: "center"
+    backgroundColor: 'red',
   },
+  post: {
+    backgroundColor: 'blue',
 
-  text1: {
-    fontSize: 30,
-    color: 'white', 
-    marginTop: 40,
-    alignSelf: "center",
-    
+  },
+  postheader: {
+    flexDirection: 'row',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 5,
+  },
+  postheaderesquerda: {
+    flexDirection: 'row',
+    alignItems: 'center',
+
+  },
+  postheaderimg: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  postimg: {
+    width: '100%',
   }
 });
+  
