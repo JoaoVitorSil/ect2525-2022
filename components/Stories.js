@@ -1,48 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Image, Text, FlatList } from "react-native";
 
 export default function Stories() {
+  const [stories, setStories] = useState([]);
 
-    const stories = [
-        {
-            id: 1,
-            nome: 'Perna',
-            src: require("../assets/images/pernalonga.png"),
-        },
-        {
-            id: 2,
-            nome: 'Frajola',
-            src: require("../assets/images/frajola.png"),
-        },
-        {
-            id: 3,
-            nome: 'Patolino',
-            src: require("../assets/images/patolino.png"),
-        },
-        {
-            id: 4,
-            nome: 'Taz',
-            src: require("../assets/images/taz.webp"),
-        },
-        {
-            id: 5,
-            nome: 'Piu Piu',
-            src: require("../assets/images/piupiu.png"),
-        },
-    ];
-
-    function renderItem({item}){
-        return(
-            <View style={styles.story}>
-                <Image
-                    style={styles.imgstory}
-                    source={item.src}
-                />
-                <Text>{item.nome}</Text>
-            </View>
-        );
+  useEffect(() => {
+    async function getData(){
+      const response = await fetch('https://mobile.ect.ufrn.br:3000/stories');
+      const stories = await response.json();
+      setStories(stories)
     }
-    
+    getData();
+  }, [])
+
+
+  function renderItem({ item }) {
+    return (
+      <View style={styles.story}>
+        <Image
+          style={styles.imgstory}
+          source={{uri: item.imgPerfilUri}}
+        />
+        <Text>{item.nomeUsuario}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.stories}>
       <FlatList

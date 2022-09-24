@@ -1,31 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { StyleSheet, View, Image, Text, FlatList } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function Feed() {
-  const feed = [
-    {
-      id: 1,
-      nome: "Piu Piu",
-      imgPerfil: require("../assets/images/piupiu.png"),
-      img: require("../assets/images/tiny_toon.jpg"),
-      aspectRatio: 1.7751,
-    },
-    {
-      id: 2,
-      nome: "Frajola",
-      imgPerfil: require("../assets/images/frajola.png"),
-      img: require("../assets/images/baby-looney-tunes.jpg"),
-      aspectRatio: 1.5689,
-    },
-    {
-      id: 3,
-      nome: "Perna",
-      imgPerfil: require("../assets/images/pernalonga.png"),
-      img: require("../assets/images/looneytunes.webp"),
-      aspectRatio: 1.3333,
-    },
-  ];
+  const [feed, setFeed] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch('https://mobile.ect.ufrn.br:3000/feed');
+      const feed = await response.json();
+      setFeed(feed)
+    }
+    getData();
+  }, [])
+
 
   function renderItem({ item }) {
     return (
@@ -34,17 +22,17 @@ export default function Feed() {
           <View style={styles.postheaderesquerda}>
             <Image
               style={styles.postheaderimg}
-              source={item.imgPerfil}
+              source={{ uri: item.imgPerfilUri }}
             />
-            <Text>{item.nome}</Text>
+            <Text>{item.nomeUsuario}</Text>
           </View>
-          <FontAwesome5 style={{marginRight:15}} name="ellipsis-v" size={16} color="black" />
+          <FontAwesome5 style={{ marginRight: 15 }} name="ellipsis-v" size={16} color="black" />
         </View>
         <View>
           <Image
             style={styles.postimg}
             aspectRatio={item.aspectRatio}
-            source={item.img}
+            source={{ uri: item.imgPostUri }}
           ></Image>
         </View>
         <View style={styles.footer}>
@@ -67,11 +55,11 @@ export default function Feed() {
 
   return (
     <View style={styles.feed}>
-      <FlatList 
+      <FlatList
         data={feed}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        showsVerticalScrollIndicator ={false}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
