@@ -1,7 +1,7 @@
 import React, {useState , useEffect} from 'react'
-import { Text, View, StyleSheet, StatusBar, FlatList, Image } from 'react-native'
+import { Text, View, StyleSheet, StatusBar, FlatList, Image, TouchableOpacity } from 'react-native'
 
-export default function ChatList() {
+export default function ChatList({navigation}) {
 
   const [chatlist, setchatlist] = useState();
 
@@ -16,13 +16,13 @@ export default function ChatList() {
 
   function renderItem({item}){
     return(
-        <View style={styles.chat}>
+        <TouchableOpacity style={styles.chat} onPress={() => navigation.navigate('Chat',{id: item.id})}>
             <Image style={styles.image} source={{uri: item.imgPerfilUri}}/>
             <View style={styles.textbox}>
                 <Text style={styles.nome}>{item.nomeUsuario}</Text>
                 <Text>{item.ultimaMensagem}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     ) 
 
   }
