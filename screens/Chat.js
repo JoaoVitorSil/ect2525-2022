@@ -35,7 +35,7 @@ export default function Chat({route}) {
         </View>
         <View style={styles.inputContainer}>
             <TextInput style={styles.input}></TextInput>
-            <TouchableOpacity style={styles.sendButton}><Text>Enviar</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.sendButton}><Text style={styles.textbutton}>Enviar</Text></TouchableOpacity>
         </View>
     </View>
   )
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     messagem: {
         height: 30,
-        backgroundColor: 'grey',
+        backgroundColor: '#C0C0C0',
         borderRadius:5,
         justifyContent: 'center',
         padding: 5,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     messagemAutor: {
         height: 30,
-        backgroundColor: 'green',
+        backgroundColor: '#00FF7F',
         borderRadius:5,
         justifyContent: 'center',
         padding: 5,
@@ -80,6 +80,11 @@ const styles = StyleSheet.create({
     sendButton: {
         width: 60,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
+    textbutton: {
+        backgroundColor: '#1E90FF',
+        padding: 8,
+        borderRadius: 5,
+    }
 });
